@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.iei.schedule.model.dao.ScheduleDao">
+
+<!-- 일정 등록 -->
+<insert id="insertSchedule">
+    INSERT INTO SCHEDULE_TBL VALUES(
+        SCHEDULE_SEQ.NEXTVAL,
+        #{scheduleTitle},
+        #{scheduleContent},
+        #{scheduleDate},
+        #{startTime},
+        #{endTime}
+    )
+</insert>
+
+<!-- 일정 전체 조회 -->
+    <select id="selectScheduleList" resultType="schedule">
+        SELECT * FROM SCHEDULE_TBL
+        ORDER BY SCHEDULE_DATE, START_TIME
+    </select>
+    
+   <!-- 일정 수정 -->
+   <update id="updateSchedule">
+   	UPDATE SCHEDULE_TBL SET 
+   	SCHEDULE_TITLE = #{scheduleTitle}, 
+   	START_TIME = #{startTime},
+   	END_TIME = #{endTime}
+   	WHERE SCHEDULE_NO = #{scheduleNo}
+   </update>
+   
+   <!-- 일정 삭제 -->
+   <delete id="deleteSchedule">
+   	delete from schedule_tbl where SCHEDULE_NO = #{scheduleNo}
+   </delete>
+</mapper>
